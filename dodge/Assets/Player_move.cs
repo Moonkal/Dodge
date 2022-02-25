@@ -5,13 +5,14 @@ using UnityEngine;
 public class Player_move : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Rigidbody player;
+    public Rigidbody playerRigidbody;
     public float speed = 5f;
     public GameObject my;
+
+
     private void Start()
     {
-       
-
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     /* 이동의 사용할 컴포넌트*/
@@ -20,8 +21,15 @@ public class Player_move : MonoBehaviour
     void Update()
     {
 
-        float xInput= Input.GetAxis("holizontal");
-        float zInput = Input.GetAxis("vertical");
+        float xInput= Input.GetAxis("Horizontal");
+        float zInput = Input.GetAxis("Vertical");
+
+        float xSpeed = xInput * speed;
+        float zSpeed = zInput * speed;
+
+        Vector3 newVelocity =new  Vector3(xSpeed, 0, zSpeed);
+
+        playerRigidbody.velocity = newVelocity;
 
     }
 
@@ -29,28 +37,28 @@ public class Player_move : MonoBehaviour
     void directinput() {
         if (Input.GetKey(KeyCode.UpArrow) == true)
         {
-            player.AddForce(0f, 0f, speed);
+            playerRigidbody.AddForce(0f, 0f, speed);
 
         }
         if (Input.GetKey(KeyCode.LeftArrow) == true)
         {
-            player.AddForce(-speed, 0f, 0f);
+            playerRigidbody.AddForce(-speed, 0f, 0f);
 
         }
         if (Input.GetKey(KeyCode.RightArrow) == true)
         {
-            player.AddForce(speed, 0f, 0f);
+            playerRigidbody.AddForce(speed, 0f, 0f);
 
         }
         if (Input.GetKey(KeyCode.DownArrow) == true)
         {
-            player.AddForce(0f, 0f, -speed);
+            playerRigidbody.AddForce(0f, 0f, -speed);
 
         }
 
     }
 
-    void die() {
+    public void die() {
         my.SetActive(false);
         gameObject.SetActive(false);
  
