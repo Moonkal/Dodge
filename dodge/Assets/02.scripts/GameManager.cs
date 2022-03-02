@@ -1,31 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//UI °ü·Ã ¶óÀÌºê·¯¸®
+//UI ê´€ë ¨ ë¼ì´ë¸ŒëŸ¬ë¦¬
 using UnityEngine.UI;
 
-//¾À °ü¸® ¶óÀÌºê·¯¸®
+//ì”¬ ê´€ë¦¬ ë¼ì´ë¸ŒëŸ¬ë¦¬
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
-    //°ÔÀÓ ¿À¹ö½Ã È°¼ºÈ­ ÇÒ ÅØ½ºÆ® °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ ´ãÀ½
+    //ê²Œì„ ì˜¤ë²„ì‹œ í™œì„±í™” í•  í…ìŠ¤íŠ¸ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ë‹´ìŒ
 
     public GameObject gmaeOverText;
-        //»ıÁ¸½Ã°£À» Ç¥½ÃÇÒ ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+        //ìƒì¡´ì‹œê°„ì„ í‘œì‹œí•  í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
     public Text timeText;
-    //ÃÖ°í ±â·ÏÀ» Ç¥½ÃÇÒ ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+    //ìµœê³  ê¸°ë¡ì„ í‘œì‹œí•  í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
     public Text recordText;
-    //½ÇÁ¦ »ıÁ¸ ½Ã°£ 
+    //ì‹¤ì œ ìƒì¡´ ì‹œê°„ 
     private float survivleTime;
-    //°ÔÀÓ ¿À¹ö »óÅÂ
+    //ê²Œì„ ì˜¤ë²„ ìƒíƒœ
     private bool GameOver;
 
     void Start()
 
     {
-        //»ıÁ¸½Ã°£°ú °ÔÀÓ ¿À¹ö »ó´ë ÃÊ±âÈ­
+        //ìƒì¡´ì‹œê°„ê³¼ ê²Œì„ ì˜¤ë²„ ìƒëŒ€ ì´ˆê¸°í™”
         survivleTime = 0f;
         GameOver = false;
 
@@ -34,18 +34,66 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // °ÔÀÓ ¿À¹ö»óÅÂ°¡ ¾Æ´Ñ µ¿¾È 
-        if (!GameOver) {
-            // »ıÁ¸½Ã°£ °»½Å
+
+        // ê²Œì„ ì˜¤ë²„ìƒíƒœê°€ ì•„ë‹Œ ë™ì•ˆ 
+        if (!GameOver)
+        {
+            // ìƒì¡´ì‹œê°„ ê°±ì‹ 
             survivleTime += Time.deltaTime;
-            //°»½ÅÇÑ »ıÁ¸ ½Ã°£À» timetext ÄÄÆ÷³ÍÆ®¸¦ ÀÌ¿ëÇØ Ç¥½Ã;
-            timeText.text ="TIme :"+(int)survivleTime;
+            //ê°±ì‹ í•œ ìƒì¡´ ì‹œê°„ì„ timetext ì»´í¬ë„ŒíŠ¸ë¥¼ ì´ìš©í•´ í‘œì‹œ;
+            timeText.text = "TIme :" + (int)survivleTime;
 
         }
+        else {
+            //ê²Œì„ ì˜¤ë²„ì¸ ìƒíƒœì—ì„œ rí‚¤ë¥¼ ëˆ„ë¥¸ë‹¤ë©´ 
+            if (Input.GetKeyDown(KeyCode.R)) {
+                //sampleì”¬ì„ ë¡œë“œ
+                SceneManager.LoadScene("SampleScene");
+
+
+            }
+        }
     }
-    //ÇöÀç °ÔÀÓÀ» °ÔÀÓ¿À¹ö »óÅÂ·Î º¯°æÇÏ´Â ¸Ş¼Òµå
+    //í˜„ì¬ ê²Œì„ì„ ê²Œì„ì˜¤ë²„ ìƒíƒœë¡œ ë³€ê²½í•˜ëŠ” ë©”ì†Œë“œ
     public void EndGame() {
-        //ÇöÀç »óÅÂ¸¦ °ÔÀÓ¿À¹ö »óÅÂ·Î ÀüÈ¯
+        //í˜„ì¬ ìƒíƒœë¥¼ ê²Œì„ì˜¤ë²„ ìƒíƒœë¡œ ì „í™˜
         GameOver = true;
+        //ê²Œì„ ì˜¤ë²„ í…ìŠ¤íŠ¸ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”
+        gmaeOverText.SetActive(true);
+        //timeText.enabled = true;
+        //ê¸°ë¡ì„ ë°ì´í„°ë¡œ ì €ì¥í•˜ëŠ” ë°©ë²•
+
+        //PlayerPrefs(PlayerPrefs preference)
+        //ëˆ 1000ì›ì„ ë°ì´í„°ì— ì €ì¥í•˜ë ¤ë©´
+        /*PlayerPrefs.SetInt("money", 1000);
+        PlayerPrefs.SetString("nick", "Taehun");
+        Debug.Log(PlayerPrefs.GetInt("money"));
+        Debug.Log(PlayerPrefs.GetString("nick"));*/
+
+
+        //best time í‚¤ë¡œ ì €ì¥ëœ ì´ì „ê¹Œì§€ì˜ ìµœê³ ê¸°ë¡ì„ ê°€ì ¸ì˜´
+        float bestTime=PlayerPrefs.GetFloat("bestTime");
+
+        //ì´ì „ê¹Œì§€ì˜ ìµœê³  ê¸°ë¡ê³¼ í˜„ì¬ ìƒì¡´ì‹œê°„ì„ ë¹„êµ
+
+        if (bestTime < survivleTime) {
+            //ìµœê³  ê¸°ë¡ ê°’ì„ í˜„ì¬ ìƒì¡´ ì‹œê°„ ë¹„êµ
+            bestTime = survivleTime;
+
+            //ë³€ê²½ëœ ìµœê³  ê¸°ë¡ì„ besttime í‚¤ë¡œ ì €ì¥;
+            PlayerPrefs.SetFloat("bestTime", bestTime);
+
+        }
+        //ìµœê³  ê¸°ë¡ì„ recordtesxt ì»´í¬ë„ŒíŠ¸ì— í‘œì‹œ
+
+        recordText.text = "BestTime:" + (int)bestTime;
+       
+
     }
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "filed"){ 
+            SceneManager.LoadScene("filed")
+        }
+    }*/
 }
